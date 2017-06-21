@@ -19,16 +19,16 @@ end
 
 # Iterate over the apache sites
 node["apache"]["sites"].each do |site_name, site_data|
-	#Enable an Apache Virtualhost
-	apache_vhost site_name do  
-	  site_port site_data["port"]
-	  action :create
+  #Enable an Apache Virtualhost
+  apache_vhost site_name do  
+    site_port site_data["port"]
+    action :create
       notifies :restart, "service[httpd]"
-	end
+  end
 end
 
 service "httpd" do
-  action [ :enable, :start ]
+  action [:enable, :start]
 end
 
 
